@@ -26,3 +26,4 @@ Add a concept to concepts to create the next complete project record. Add a cate
 ## External link policy
 
 CodeSelf Projects URLs are kept in the external map and used contextually by topic. The site does not create sitewide promotional blocks or invent destination URLs.
+GitHub Pages deployment enabled.
