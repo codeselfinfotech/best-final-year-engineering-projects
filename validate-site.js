@@ -2,6 +2,80 @@ const fs = require('fs');
 const path = require('path');
 const root = __dirname;
 const base = 'https://codeselfinfotech.github.io/best-final-year-engineering-projects';
+const verifiedCodeSelf = new Set([
+  'https://projects.codeselfinfotech.com/',
+  'https://projects.codeselfinfotech.com/projects',
+  'https://projects.codeselfinfotech.com/free-projects',
+  'https://projects.codeselfinfotech.com/categories',
+  'https://projects.codeselfinfotech.com/services',
+  'https://projects.codeselfinfotech.com/project-ideas',
+  'https://projects.codeselfinfotech.com/categories/ieee-projects',
+  'https://projects.codeselfinfotech.com/categories/ai-ml',
+  'https://projects.codeselfinfotech.com/categories/web-applications',
+  'https://projects.codeselfinfotech.com/categories/iot-embedded',
+  'https://projects.codeselfinfotech.com/categories/data-science',
+  'https://projects.codeselfinfotech.com/categories/cybersecurity',
+  'https://projects.codeselfinfotech.com/categories/cloud-devops',
+  'https://projects.codeselfinfotech.com/categories/mobile-apps',
+  'https://projects.codeselfinfotech.com/categories/blockchain-web3',
+  'https://projects.codeselfinfotech.com/categories/computer-vision-nlp',
+  'https://projects.codeselfinfotech.com/categories/robotics-automation',
+  'https://projects.codeselfinfotech.com/project-ideas/ai-machine-learning',
+  'https://projects.codeselfinfotech.com/project-ideas/cyber-security',
+  'https://projects.codeselfinfotech.com/project-ideas/data-science-analytics',
+  'https://projects.codeselfinfotech.com/project-ideas/full-stack-web-development',
+  'https://projects.codeselfinfotech.com/project-ideas/iot-embedded-systems',
+  'https://projects.codeselfinfotech.com/project-ideas/robotics-automation',
+  'https://projects.codeselfinfotech.com/project-ideas/ece',
+  'https://projects.codeselfinfotech.com/project-ideas/python-projects',
+  'https://projects.codeselfinfotech.com/project-ideas/machine-learning',
+  'https://projects.codeselfinfotech.com/project-ideas/reinforcement-learning',
+  'https://projects.codeselfinfotech.com/project-ideas/generative-ai',
+  'https://projects.codeselfinfotech.com/project-ideas/natural-language-processing',
+  'https://projects.codeselfinfotech.com/project-ideas/big-data',
+  'https://projects.codeselfinfotech.com/project-ideas/computer-vision',
+  'https://projects.codeselfinfotech.com/project-ideas/image-processing',
+  'https://projects.codeselfinfotech.com/project-ideas/power-electronics',
+  'https://projects.codeselfinfotech.com/project-ideas/ai-iot',
+  'https://projects.codeselfinfotech.com/project-ideas/internet-of-things-iot',
+  'https://projects.codeselfinfotech.com/project-ideas/vlsi-matlab',
+  'https://projects.codeselfinfotech.com/project-ideas/mern-stack',
+  'https://projects.codeselfinfotech.com/project-ideas/java',
+  'https://projects.codeselfinfotech.com/project-ideas/android',
+  'https://projects.codeselfinfotech.com/project-ideas/web-development',
+  'https://projects.codeselfinfotech.com/project-ideas/cloud-computing',
+  'https://projects.codeselfinfotech.com/project-ideas/blockchain-web3',
+  'https://projects.codeselfinfotech.com/project-ideas/agriculture',
+  'https://projects.codeselfinfotech.com/project-ideas/real-time-problem-solving',
+  'https://projects.codeselfinfotech.com/project-ideas/real-time-projects',
+  'https://projects.codeselfinfotech.com/project-ideas/cyber-security-project-ideas',
+  'https://projects.codeselfinfotech.com/services/final-year-engineering-projects',
+  'https://projects.codeselfinfotech.com/services/ieee-projects',
+  'https://projects.codeselfinfotech.com/services/academic-project-support',
+  'https://projects.codeselfinfotech.com/services/custom-project-development',
+  'https://projects.codeselfinfotech.com/services/project-documentation',
+  'https://projects.codeselfinfotech.com/services/internship-projects',
+  'https://projects.codeselfinfotech.com/services/best-mini-project-ideas',
+  'https://projects.codeselfinfotech.com/services/placement-projects',
+  'https://projects.codeselfinfotech.com/services/final-year-projects-for-computer-science-with-source-code',
+  'https://projects.codeselfinfotech.com/services/cse-final-year-project-ideas-with-source-code',
+  'https://projects.codeselfinfotech.com/services/best-ieee-project-center-in-bangalore',
+  'https://projects.codeselfinfotech.com/services/ece-final-year-project-ideas-with-source-code',
+  'https://projects.codeselfinfotech.com/services/best-final-year-project-center',
+  'https://projects.codeselfinfotech.com/services/best-final-year-iot-projects-with-source-code',
+  'https://projects.codeselfinfotech.com/services/50-best-bca-final-year-project-ideas-with-source-code',
+  'https://projects.codeselfinfotech.com/services/best-project-center-in-bangalore-for-final-year-engineering',
+  'https://projects.codeselfinfotech.com/services/engineering-project-makers-bangalore',
+  'https://projects.codeselfinfotech.com/services/final-year-engineering-projects-bangalore',
+  'https://projects.codeselfinfotech.com/services/best-final-year-project-center-in-bangalore',
+  'https://projects.codeselfinfotech.com/services/best-final-year-cse-project-center-in-bangalore',
+  'https://projects.codeselfinfotech.com/services/final-year-ece-projects-in-bangalore',
+  'https://projects.codeselfinfotech.com/services/mini-project-ideas-for-bca-students',
+  'https://projects.codeselfinfotech.com/services/best-mca-mini-projects',
+  'https://projects.codeselfinfotech.com/services/best-diploma-projects',
+  'https://projects.codeselfinfotech.com/services/best-mca-project-ideas',
+  'https://projects.codeselfinfotech.com/services/top-engineering-project-ideas'
+]);
 const projects = JSON.parse(fs.readFileSync(path.join(root, 'data', 'projects.json'), 'utf8'));
 const html = [];
 function walk(dir) {
@@ -29,6 +103,9 @@ check(text.every(page => /<meta name="description" content="[^"]+"/.test(page)),
 check(text.every(page => page.includes('rel="canonical"') && page.includes('og:title') && page.includes('og:description') && page.includes('og:image')), 'Missing canonical or Open Graph metadata');
 check(text.every(page => page.includes('twitter:card') && page.includes('twitter:title')), 'Missing Twitter metadata');
 check(text.every(page => page.includes('projects.codeselfinfotech.com/')), 'A page is missing a CodeSelf contextual URL');
+const externalByPage = text.map(page => [...page.matchAll(/href="(https:\/\/projects\.codeselfinfotech\.com\/[^"#]*)"/g)].map(match => match[1]));
+check(externalByPage.every(links => links.length === 1), 'A page does not contain exactly one contextual CodeSelf link');
+check(externalByPage.flat().every(url => verifiedCodeSelf.has(url)), 'An external CodeSelf href is not in the verified allowlist');
 check(text.every(page => page.includes(`href="${base}/`)), 'A page is missing an internal link');
 check(text.filter(page => page.includes('class="crumbs"')).length >= html.length - 1, 'Missing breadcrumbs');
 check(text.every(page => page.includes('class="faq')), 'A page is missing an FAQ section');
