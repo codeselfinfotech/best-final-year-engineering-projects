@@ -5,7 +5,7 @@
 ## Contents
 
 - 300 numbered project records in [data/projects.json](data/projects.json), from EP-001 through EP-300.
-- 128 keyword-focused guides plus project, category, and department directories.
+- 281 keyword-focused guides plus project, category, and department directories.
 - Responsive HTML/CSS with a small search script; no framework or build dependency is needed.
 - SVG logo and favicon in [assets](assets).
 
